@@ -326,24 +326,27 @@ input, textarea { font: inherit; color: inherit; }
       </div>
     </dl>
   </div>
-  <form style="flex: 1 1 min(380px, 100%); min-width: 0; padding: clamp(20px, 3vw, 32px); border-radius: 28px; background: #FFFDFB; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
+  <form id="lead-form" style="flex: 1 1 min(380px, 100%); min-width: 0; padding: clamp(20px, 3vw, 32px); border-radius: 28px; background: #FFFDFB; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
     <div style="display: flex; flex-direction: column; gap: 6px">
       <label for="f-name" style="font-size: 15px; font-weight: 500">Ваше ім’я</label>
-      <input id="f-name" type="text" autocomplete="name" style="min-height: 48px; padding: 0 16px; border-radius: 14px; border: 1px solid #B9AFA8; background: #FFFFFF; box-sizing: border-box; width: 100%">
+      <input id="f-name" name="name" type="text" required maxlength="100" autocomplete="name" style="min-height: 48px; padding: 0 16px; border-radius: 14px; border: 1px solid #B9AFA8; background: #FFFFFF; box-sizing: border-box; width: 100%">
     </div>
     <div style="display: flex; flex-direction: column; gap: 6px">
       <label for="f-contact" style="font-size: 15px; font-weight: 500">Телефон або Telegram</label>
-      <input id="f-contact" type="text" autocomplete="tel" style="min-height: 48px; padding: 0 16px; border-radius: 14px; border: 1px solid #B9AFA8; background: #FFFFFF; box-sizing: border-box; width: 100%">
+      <input id="f-contact" name="contact" type="text" required maxlength="100" autocomplete="tel" style="min-height: 48px; padding: 0 16px; border-radius: 14px; border: 1px solid #B9AFA8; background: #FFFFFF; box-sizing: border-box; width: 100%">
     </div>
     <div style="display: flex; flex-direction: column; gap: 6px">
       <label for="f-age" style="font-size: 15px; font-weight: 500">Вік дитини</label>
-      <input id="f-age" type="text" inputmode="numeric" style="min-height: 48px; padding: 0 16px; border-radius: 14px; border: 1px solid #B9AFA8; background: #FFFFFF; box-sizing: border-box; width: 100%">
+      <input id="f-age" name="age" type="text" maxlength="20" inputmode="numeric" style="min-height: 48px; padding: 0 16px; border-radius: 14px; border: 1px solid #B9AFA8; background: #FFFFFF; box-sizing: border-box; width: 100%">
     </div>
     <div style="display: flex; flex-direction: column; gap: 6px">
       <label for="f-request" style="font-size: 15px; font-weight: 500">Що вас турбує</label>
-      <textarea id="f-request" rows="3" style="padding: 12px 16px; border-radius: 14px; border: 1px solid #B9AFA8; background: #FFFFFF; box-sizing: border-box; width: 100%; resize: vertical"></textarea>
+      <textarea id="f-request" name="request" rows="3" maxlength="1000" style="padding: 12px 16px; border-radius: 14px; border: 1px solid #B9AFA8; background: #FFFFFF; box-sizing: border-box; width: 100%; resize: vertical"></textarea>
     </div>
-    <button class="btn" type="button" style="min-height: 56px; padding: 8px 20px; border: 0; border-radius: 999px; background: #AEBCCA; color: #2B2622; font: inherit; font-weight: 500; cursor: pointer">Записатися на консультацію&nbsp;→</button>
+    <p style="font-size: 14px; line-height: 1.4; color: #6B625C">Надсилаючи заявку, ви погоджуєтеся на обробку цих даних, щоб я могла зв’язатися з вами.</p>
+    <div aria-hidden="true" style="position: absolute; left: -9999px"><label>Не заповнюйте це поле <input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
+    <button id="lead-submit" class="btn" type="submit" style="min-height: 56px; padding: 8px 20px; border: 0; border-radius: 999px; background: #AEBCCA; color: #2B2622; font: inherit; font-weight: 500; cursor: pointer">Записатися на консультацію&nbsp;→</button>
+    <p id="lead-status" role="status" aria-live="polite" hidden style="font-size: 15px; line-height: 1.4; font-weight: 500; color: #33302E"></p>
   </form>
 </section>
 
@@ -355,5 +358,46 @@ input, textarea { font: inherit; color: inherit; }
 </div>
 </div>
 </div>
+<script>
+(function () {
+  var form = document.getElementById('lead-form');
+  var button = document.getElementById('lead-submit');
+  var status = document.getElementById('lead-status');
+  var label = button.textContent;
+  var failure = 'Не вдалося надіслати заявку. Напишіть у Telegram @Ukraine_lilac або зателефонуйте 095 363 93 79.';
+  var success = 'Дякую! Заявку отримано, я напишу вам найближчим часом.';
+
+  function show(text) {
+    status.textContent = text;
+    status.hidden = false;
+  }
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    status.hidden = true;
+    button.disabled = true;
+    button.textContent = 'Надсилаємо…';
+    var data = Object.fromEntries(new FormData(form).entries());
+    var controller = new AbortController();
+    var timer = setTimeout(function () { controller.abort(); }, 15000);
+    fetch('/api/lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+      signal: controller.signal
+    }).then(function (response) {
+      if (!response.ok) throw new Error('request failed');
+      form.reset();
+      show(success);
+    }).catch(function () {
+      show(failure);
+    }).finally(function () {
+      clearTimeout(timer);
+      button.disabled = false;
+      button.textContent = label;
+    });
+  });
+})();
+</script>
 </body>
 </html>
