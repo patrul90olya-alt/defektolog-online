@@ -31,7 +31,8 @@
    "telephone": "+380953639379",
    "url": "https://pro-defektolog-online.vercel.app/",
    "sameAs": [
-    "https://t.me/Ukraine_lilac"
+    "https://t.me/Ukraine_lilac",
+    "https://www.facebook.com/share/1G62zZ8fbD/"
    ]
   },
   {
@@ -140,6 +141,26 @@ input, textarea { font: inherit; color: inherit; }
   .btn { transition: none; }
 }
 </style>
+<script>document.documentElement.classList.add('js');</script>
+<style>
+.menu-btn { display: none; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 1px solid #B9AFA8; border-radius: 999px; background: #FFFDFB; color: #33302E; font: inherit; font-size: 15px; font-weight: 500; cursor: pointer; }
+.menu-btn svg { display: block; flex: none; }
+.menu-btn .i-close { display: none; }
+.menu-btn[aria-expanded="true"] .i-open { display: none; }
+.menu-btn[aria-expanded="true"] .i-close { display: block; }
+.menu-btn:focus-visible { outline: 3px solid #AD6048; outline-offset: 2px; }
+@media (max-width: 900px) {
+  .menu-btn { display: inline-flex; }
+  html.js .nav { display: none !important; }
+  html.js .nav.is-open { display: flex !important; flex-direction: column; gap: 0 !important; padding: 4px 20px; border-radius: 20px; background: #FFFDFB; font-size: 17px !important; }
+  html.js .nav.is-open a { min-height: 52px !important; border-top: 1px solid #EFE4DC; }
+  html.js .nav.is-open a:first-child { border-top: 0; }
+}
+@media (max-width: 400px) {
+  .menu-btn { width: 48px; padding: 0; justify-content: center; }
+  .menu-btn .menu-label { display: none; }
+}
+</style>
 </head>
 <body>
 <div style="background: #FBF1E9; color: #33302E; font-family: 'Onest', 'Segoe UI', Roboto, Arial, sans-serif; font-size: 17px; line-height: 1.55; padding-bottom: 32px">
@@ -155,15 +176,20 @@ input, textarea { font: inherit; color: inherit; }
       <span style="font-size: 14px; color: #6B625C">логопед-дефектолог</span>
     </span>
   </a>
-  <nav class="nav" aria-label="Розділи сторінки" style="display: flex; flex-wrap: wrap; gap: 0 24px; font-size: 15px; color: #33302E">
+  <nav class="nav" id="site-nav" aria-label="Розділи сторінки" style="display: flex; flex-wrap: wrap; gap: 0 24px; font-size: 15px; color: #33302E">
     <a class="navlink" href="#about" style="display: flex; align-items: center; min-height: 44px">Про мене</a>
     <a class="navlink" href="#skills" style="display: flex; align-items: center; min-height: 44px">Напрями роботи</a>
     <a class="navlink" href="#format" style="display: flex; align-items: center; min-height: 44px">Формат занять</a>
     <a class="navlink" href="#reviews" style="display: flex; align-items: center; min-height: 44px">Відгуки</a>
-    <a class="navlink" href="/vpravy/" style="display: flex; align-items: center; min-height: 44px">Онлайн-вправи</a>
+    <a class="navlink" href="/vpravy.html" style="display: flex; align-items: center; min-height: 44px">Онлайн-вправи</a>
     <a class="navlink" href="#contacts" style="display: flex; align-items: center; min-height: 44px">Контакти</a>
   </nav>
   <a class="btn hdr-cta" href="#contacts" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px; background: #AEBCCA; color: #2B2622; font-weight: 500; font-size: 15px; text-decoration: none">Записатися&nbsp;→</a>
+  <button class="menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="site-nav">
+    <svg class="i-open" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 5.5H17"></path><path d="M3 10H17"></path><path d="M3 14.5H17"></path></svg>
+    <svg class="i-close" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 5L15 15"></path><path d="M15 5L5 15"></path></svg>
+    <span class="menu-label">Меню</span>
+  </button>
 </header>
 </div>
 <div class="hero-wrap">
@@ -380,15 +406,38 @@ input, textarea { font: inherit; color: inherit; }
 </section>
 
 <!-- Відгуки -->
-<section id="reviews" style="display: flex; flex-wrap: wrap; gap: 24px 56px; align-items: center; scroll-margin-top: 24px">
-  <h2 style="flex: 1 1 280px; min-width: 0; font-size: clamp(28px, 3.2vw, 42px); line-height: 1.15; font-weight: 600">Відгуки батьків</h2>
-  <figure style="flex: 2.2 1 min(480px, 100%); min-width: 0; margin: 0; padding: clamp(24px, 3vw, 36px); border-radius: 24px; background: #FFFDFB; display: flex; flex-direction: column; gap: 20px">
-    <blockquote style="margin: 0; font-size: clamp(19px, 2vw, 23px); line-height: 1.4">«Ірина — неймовірний спеціаліст! Дитина із задоволенням займається, а результати помітні вже після кількох занять.»</blockquote>
-    <figcaption style="display: flex; align-items: center; gap: 12px; font-size: 16px; color: #5E5651">
-      <span aria-hidden="true" style="width: 44px; height: 44px; border-radius: 50%; background: #F5DFD0; color: #33302E; display: flex; align-items: center; justify-content: center; font-weight: 600">М</span>
-      Марина, мама Софійки
-    </figcaption>
-  </figure>
+<section id="reviews" style="display: flex; flex-direction: column; gap: 32px; scroll-margin-top: 24px">
+  <h2 style="font-size: clamp(28px, 3.2vw, 42px); line-height: 1.15; font-weight: 600">Відгуки батьків</h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 16px">
+    <figure style="margin: 0; padding: clamp(24px, 3vw, 32px); border-radius: 24px; background: #FFFDFB; display: flex; flex-direction: column; gap: 20px">
+      <blockquote style="flex: 1; margin: 0; font-size: 17px; line-height: 1.6">«Ірина — неймовірний спеціаліст! Дитина із задоволенням займається, а результати помітні вже після кількох занять.»</blockquote>
+      <figcaption style="display: flex; align-items: center; gap: 12px; font-size: 16px; color: #5E5651">
+        <span aria-hidden="true" style="flex: none; width: 44px; height: 44px; border-radius: 50%; background: #F5DFD0; color: #33302E; display: flex; align-items: center; justify-content: center; font-weight: 600">М</span>
+        Марина, мама Софійки
+      </figcaption>
+    </figure>
+    <figure style="margin: 0; padding: clamp(24px, 3vw, 32px); border-radius: 24px; background: #FFFDFB; display: flex; flex-direction: column; gap: 20px">
+      <blockquote style="flex: 1; margin: 0; font-size: 17px; line-height: 1.6">«Ірина — чудовий фахівець, яка справді любить свою справу. Вона дуже уважна до дитини, терпляча та доброзичлива. Кожне заняття проходить цікаво, у формі гри, тому дитина навіть не помічає, скільки всього нового встигає навчитися. Дякуємо за професіоналізм і турботу!»</blockquote>
+      <figcaption style="display: flex; align-items: center; gap: 12px; font-size: 16px; color: #5E5651">
+        <span aria-hidden="true" style="flex: none; width: 44px; height: 44px; border-radius: 50%; background: #D9DBE1; color: #33302E; display: flex; align-items: center; justify-content: center; font-weight: 600">В</span>
+        Вікторія, мама Андрія
+      </figcaption>
+    </figure>
+    <figure style="margin: 0; padding: clamp(24px, 3vw, 32px); border-radius: 24px; background: #FFFDFB; display: flex; flex-direction: column; gap: 20px">
+      <blockquote style="flex: 1; margin: 0; font-size: 17px; line-height: 1.6">«Дитина спочатку соромилася та не хотіла залишатися на заняттях без мами. Але завдяки теплу, терпінню та уважності Ірини адаптація пройшла дуже легко. Тепер малюк із нетерпінням чекає кожної зустрічі. Дуже цінуємо не лише професійність, а й людяність Ірини.»</blockquote>
+      <figcaption style="display: flex; align-items: center; gap: 12px; font-size: 16px; color: #5E5651">
+        <span aria-hidden="true" style="flex: none; width: 44px; height: 44px; border-radius: 50%; background: #EBC6AD; color: #33302E; display: flex; align-items: center; justify-content: center; font-weight: 600">А</span>
+        Анастасія, мама Катерини
+      </figcaption>
+    </figure>
+    <figure style="margin: 0; padding: clamp(24px, 3vw, 32px); border-radius: 24px; background: #FFFDFB; display: flex; flex-direction: column; gap: 20px">
+      <blockquote style="flex: 1; margin: 0; font-size: 17px; line-height: 1.6">«Хочу подякувати Ірині за її працю! Подобається, що вона не просто проводить заняття, а пояснює батькам особливості розвитку дитини, дає корисні рекомендації та завжди відповідає на запитання. Відчувається індивідуальний підхід, щире бажання допомогти та любов до дітей. Рекомендуємо від усього серця!»</blockquote>
+      <figcaption style="display: flex; align-items: center; gap: 12px; font-size: 16px; color: #5E5651">
+        <span aria-hidden="true" style="flex: none; width: 44px; height: 44px; border-radius: 50%; background: #F5DFD0; color: #33302E; display: flex; align-items: center; justify-content: center; font-weight: 600">Т</span>
+        Тетяна, мама Артура
+      </figcaption>
+    </figure>
+  </div>
 </section>
 
 <!-- Заявка і контакти -->
@@ -404,6 +453,10 @@ input, textarea { font: inherit; color: inherit; }
       <div style="display: flex; flex-wrap: wrap; gap: 2px 16px">
         <dt style="font-weight: 600; min-width: 96px">Telegram</dt>
         <dd><a href="https://t.me/Ukraine_lilac" style="text-underline-offset: 3px">@Ukraine_lilac</a></dd>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 2px 16px">
+        <dt style="font-weight: 600; min-width: 96px">Facebook</dt>
+        <dd><a href="https://www.facebook.com/share/1G62zZ8fbD/" target="_blank" rel="noopener" style="text-underline-offset: 3px">Ірина Солона</a></dd>
       </div>
     </dl>
   </div>
@@ -478,6 +531,25 @@ input, textarea { font: inherit; color: inherit; }
       button.textContent = label;
     });
   });
+})();
+</script>
+<script>
+(function () {
+  var button = document.querySelector('.menu-btn');
+  var nav = document.getElementById('site-nav');
+  if (!button || !nav) return;
+  function setOpen(open) {
+    nav.classList.toggle('is-open', open);
+    button.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  button.addEventListener('click', function () { setOpen(!nav.classList.contains('is-open')); });
+  nav.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && nav.classList.contains('is-open')) { setOpen(false); button.focus(); }
+  });
+  var wide = window.matchMedia('(min-width: 901px)');
+  var onWide = function (m) { if (m.matches) setOpen(false); };
+  if (wide.addEventListener) wide.addEventListener('change', onWide); else wide.addListener(onWide);
 })();
 </script>
 </body>
